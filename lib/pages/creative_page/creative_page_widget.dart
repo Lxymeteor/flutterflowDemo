@@ -39,8 +39,8 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      body: SafeArea(
-        top: true,
+      body: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -92,8 +92,8 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
                     color: Color(0xFF333333),
                     size: 24.0,
                   ),
-                  onPressed: () {
-                    print('IconButton pressed ...');
+                  onPressed: () async {
+                    context.pushNamed('creativePartner');
                   },
                 ),
               ],
