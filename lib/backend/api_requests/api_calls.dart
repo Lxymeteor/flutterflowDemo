@@ -53,6 +53,30 @@ class GetUsersCall {
   }
 }
 
+class PostCall {
+  static Future<ApiCallResponse> call({
+    dynamic productsJson,
+  }) async {
+    final products = _serializeJson(productsJson);
+    final ffApiRequestBody = products;
+    return ApiManager.instance.makeApiCall(
+      callName: 'post',
+      apiUrl: 'https://dummyjson.com/products/add',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
