@@ -52,24 +52,25 @@ class _MessagePageWidgetState extends State<MessagePageWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Stack(
                     children: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
-                        child: GradientText(
-                          'Message',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
-                                    fontSize: 32.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                          colors: [
-                            FlutterFlowTheme.of(context).customColor1,
-                            Colors.white
-                          ],
-                          gradientDirection: GradientDirection.ttb,
-                          gradientType: GradientType.linear,
+                      Opacity(
+                        opacity: 0.1,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 25.0, 0.0, 0.0),
+                          child: GradientText(
+                            'Message',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: Colors.white,
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                ),
+                            colors: const [Color(0xFF0F1E48), Colors.white],
+                            gradientDirection: GradientDirection.ttb,
+                            gradientType: GradientType.linear,
+                          ),
                         ),
                       ),
                       Text(

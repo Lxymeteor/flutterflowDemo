@@ -126,8 +126,8 @@ class _NavBarPageState extends State<NavBarPage> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
         unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -148,10 +148,14 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.chat_bubble_outline_outlined,
-              size: 24.0,
+              FFIcons.kroundLikeFill,
+              size: 56.0,
             ),
-            label: 'Message',
+            activeIcon: Icon(
+              FFIcons.kroundLikeFill,
+              size: 56.0,
+            ),
+            label: '',
             tooltip: '',
           ),
           BottomNavigationBarItem(
