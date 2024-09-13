@@ -182,16 +182,16 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                         topRight: Radius.circular(6.0),
                                       ),
                                     ),
-                                    alignment: AlignmentDirectional(
-                                        valueOrDefault<double>(
-                                          chatListItem.sendUserId == 1
-                                              ? 1.0
-                                              : -1.0,
-                                          0.0,
-                                        ),
-                                        0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(1.0, 0.0),
+                                      alignment: AlignmentDirectional(
+                                          valueOrDefault<double>(
+                                            chatListItem.sendUserId == 1
+                                                ? 1.0
+                                                : -1.0,
+                                            0.0,
+                                          ),
+                                          0.0),
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 5.0, 0.0),
