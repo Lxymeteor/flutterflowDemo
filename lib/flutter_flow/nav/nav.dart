@@ -111,6 +111,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'creativePartner',
           path: '/creativePartner',
           builder: (context, params) => const CreativePartnerWidget(),
+        ),
+        FFRoute(
+          name: 'ChatPage',
+          path: '/chatPage',
+          builder: (context, params) => const ChatPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

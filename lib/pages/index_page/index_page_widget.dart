@@ -202,15 +202,25 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                 ),
                                               ),
                                             ),
-                                            Container(
-                                              width: 42.0,
-                                              height: 42.0,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: Image.asset(
-                                                    'assets/images/Group_3771@2x.png',
-                                                  ).image,
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed('ChatPage');
+                                              },
+                                              child: Container(
+                                                width: 42.0,
+                                                height: 42.0,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: Image.asset(
+                                                      'assets/images/Group_3771@2x.png',
+                                                    ).image,
+                                                  ),
                                                 ),
                                               ),
                                             ),

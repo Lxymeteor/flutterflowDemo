@@ -213,4 +213,44 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInPartnerList(int index, PartnerStruct value) {
     partnerList.insert(index, value);
   }
+
+  List<ChatListStruct> _chatList = [
+    ChatListStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1\",\"sendUserId\":\"1\",\"receiveUserId\":\"2\",\"content\":\"Hello World1\",\"createTime\":\"1726196583111\",\"sendTime\":\"1726196583111\"}')),
+    ChatListStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"2\",\"sendUserId\":\"1\",\"receiveUserId\":\"2\",\"content\":\"Hello World2\",\"createTime\":\"1726196596662\",\"sendTime\":\"1726196596662\"}')),
+    ChatListStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"3\",\"sendUserId\":\"2\",\"receiveUserId\":\"1\",\"content\":\"Hello World3\",\"createTime\":\"1726196605905\",\"sendTime\":\"1726196605905\"}')),
+    ChatListStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"4\",\"sendUserId\":\"1\",\"receiveUserId\":\"2\",\"content\":\"Hello World4\",\"createTime\":\"1726196616213\",\"sendTime\":\"1726196616213\"}')),
+    ChatListStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"5\",\"sendUserId\":\"2\",\"receiveUserId\":\"1\",\"content\":\"Hello World5\",\"createTime\":\"1726196623987\",\"sendTime\":\"1726196623987\"}'))
+  ];
+  List<ChatListStruct> get chatList => _chatList;
+  set chatList(List<ChatListStruct> value) {
+    _chatList = value;
+  }
+
+  void addToChatList(ChatListStruct value) {
+    chatList.add(value);
+  }
+
+  void removeFromChatList(ChatListStruct value) {
+    chatList.remove(value);
+  }
+
+  void removeAtIndexFromChatList(int index) {
+    chatList.removeAt(index);
+  }
+
+  void updateChatListAtIndex(
+    int index,
+    ChatListStruct Function(ChatListStruct) updateFn,
+  ) {
+    chatList[index] = updateFn(_chatList[index]);
+  }
+
+  void insertAtIndexInChatList(int index, ChatListStruct value) {
+    chatList.insert(index, value);
+  }
 }
