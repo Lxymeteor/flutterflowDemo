@@ -193,8 +193,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                           ),
                                           0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 5.0, 0.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Text(
                                           chatListItem.content,
                                           style: FlutterFlowTheme.of(context)

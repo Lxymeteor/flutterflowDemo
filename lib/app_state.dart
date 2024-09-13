@@ -253,4 +253,48 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInChatList(int index, ChatListStruct value) {
     chatList.insert(index, value);
   }
+
+  String _payCount = '';
+  String get payCount => _payCount;
+  set payCount(String value) {
+    _payCount = value;
+  }
+
+  List<PayGearsStruct> _payGearsList = [
+    PayGearsStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1\",\"payCount\":\"0.99\",\"getCount\":\"0.99\",\"chooseState\":\"1\",\"state\":\"1\"}')),
+    PayGearsStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"2\",\"payCount\":\"4.99\",\"getCount\":\"4.99\",\"chooseState\":\"0\",\"state\":\"1\"}')),
+    PayGearsStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"3\",\"payCount\":\"9.99\",\"getCount\":\"9.99\",\"chooseState\":\"0\",\"state\":\"1\"}')),
+    PayGearsStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"4\",\"payCount\":\"19.99\",\"getCount\":\"19.99\",\"chooseState\":\"0\",\"state\":\"1\"}'))
+  ];
+  List<PayGearsStruct> get payGearsList => _payGearsList;
+  set payGearsList(List<PayGearsStruct> value) {
+    _payGearsList = value;
+  }
+
+  void addToPayGearsList(PayGearsStruct value) {
+    payGearsList.add(value);
+  }
+
+  void removeFromPayGearsList(PayGearsStruct value) {
+    payGearsList.remove(value);
+  }
+
+  void removeAtIndexFromPayGearsList(int index) {
+    payGearsList.removeAt(index);
+  }
+
+  void updatePayGearsListAtIndex(
+    int index,
+    PayGearsStruct Function(PayGearsStruct) updateFn,
+  ) {
+    payGearsList[index] = updateFn(_payGearsList[index]);
+  }
+
+  void insertAtIndexInPayGearsList(int index, PayGearsStruct value) {
+    payGearsList.insert(index, value);
+  }
 }

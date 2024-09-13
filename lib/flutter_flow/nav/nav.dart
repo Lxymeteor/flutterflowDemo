@@ -116,6 +116,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ChatPage',
           path: '/chatPage',
           builder: (context, params) => const ChatPageWidget(),
+        ),
+        FFRoute(
+          name: 'payPage',
+          path: '/payPage',
+          builder: (context, params) => const PayPageWidget(),
+        ),
+        FFRoute(
+          name: 'buyGemPage',
+          path: '/buyGemPage',
+          builder: (context, params) => const BuyGemPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
