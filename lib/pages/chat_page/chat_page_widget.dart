@@ -163,14 +163,13 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                     ),
                                     0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
+                                  padding: const EdgeInsets.all(10.0),
                                   child: Container(
                                     constraints: BoxConstraints(
                                       minHeight: 30.0,
                                       maxWidth:
                                           MediaQuery.sizeOf(context).width *
-                                              0.7,
+                                              0.55,
                                     ),
                                     decoration: BoxDecoration(
                                       color: chatListItem.sendUserId == 1
@@ -180,9 +179,17 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                         bottomLeft: Radius.circular(6.0),
                                         bottomRight: Radius.circular(6.0),
                                         topLeft: Radius.circular(6.0),
-                                        topRight: Radius.circular(0.0),
+                                        topRight: Radius.circular(6.0),
                                       ),
                                     ),
+                                    alignment: AlignmentDirectional(
+                                        valueOrDefault<double>(
+                                          chatListItem.sendUserId == 1
+                                              ? 1.0
+                                              : -1.0,
+                                          0.0,
+                                        ),
+                                        0.0),
                                     child: Align(
                                       alignment: const AlignmentDirectional(1.0, 0.0),
                                       child: Padding(
