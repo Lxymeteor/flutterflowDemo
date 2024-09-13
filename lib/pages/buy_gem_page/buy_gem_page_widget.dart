@@ -52,8 +52,8 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
               color: FlutterFlowTheme.of(context).primaryText,
               size: 24.0,
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
+            onPressed: () async {
+              context.safePop();
             },
           ),
           title: Text(
@@ -117,16 +117,19 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              FFAppState().payCount =
-                                  payGearsListItem.payCount.toString();
+                              _model.payCount = payGearsListItem.payCount;
+                              safeSetState(() {});
+                              _model.state = payGearsListIndex;
                               safeSetState(() {});
                             },
                             child: Container(
                               width: double.infinity,
                               height: 60.0,
                               decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                color: _model.state == payGearsListIndex
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                 boxShadow: const [
                                   BoxShadow(
                                     blurRadius: 3.0,
@@ -140,7 +143,7 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                                 ],
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
-                                  color: payGearsListItem.chooseState == 1
+                                  color: _model.state == payGearsListIndex
                                       ? FlutterFlowTheme.of(context).primary
                                       : const Color(0x00000000),
                                 ),
@@ -198,13 +201,25 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  child: Text(
-                    FFAppState().payCount,
-                    textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        '\$',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                      Text(
+                        _model.payCount.toString(),
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
                 Align(

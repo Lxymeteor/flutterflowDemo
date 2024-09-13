@@ -10,4 +10,4 @@ export '/pages/creative_partner/creative_partner_widget.dart'
     show CreativePartnerWidget;
 export '/pages/chat_page/chat_page_widget.dart' show ChatPageWidget;
 export '/pages/pay_page/pay_page_widget.dart' show PayPageWidget;
-export '/buy_gem_page/buy_gem_page_widget.dart' show BuyGemPageWidget;
+export '/pages/buy_gem_page/buy_gem_page_widget.dart' show BuyGemPageWidget;

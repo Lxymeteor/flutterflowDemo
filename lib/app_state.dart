@@ -254,12 +254,6 @@ class FFAppState extends ChangeNotifier {
     chatList.insert(index, value);
   }
 
-  String _payCount = '';
-  String get payCount => _payCount;
-  set payCount(String value) {
-    _payCount = value;
-  }
-
   List<PayGearsStruct> _payGearsList = [
     PayGearsStruct.fromSerializableMap(jsonDecode(
         '{\"id\":\"1\",\"payCount\":\"0.99\",\"getCount\":\"0.99\",\"chooseState\":\"1\",\"state\":\"1\"}')),
