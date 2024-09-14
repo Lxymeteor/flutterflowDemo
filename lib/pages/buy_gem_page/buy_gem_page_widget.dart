@@ -212,6 +212,7 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       '\$',
