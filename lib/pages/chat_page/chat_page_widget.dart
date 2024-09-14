@@ -43,7 +43,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFEEEFF5),
         appBar: AppBar(
           backgroundColor: const Color(0xFFF1F4F8),
           automaticallyImplyLeading: false,
@@ -175,11 +175,23 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                       color: chatListItem.sendUserId == 1
                                           ? const Color(0xFFFCFCFC)
                                           : const Color(0xFFDAF18D),
-                                      borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(6.0),
-                                        bottomRight: Radius.circular(6.0),
-                                        topLeft: Radius.circular(6.0),
-                                        topRight: Radius.circular(6.0),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: const Radius.circular(6.0),
+                                        bottomRight: const Radius.circular(6.0),
+                                        topLeft: Radius.circular(
+                                            valueOrDefault<double>(
+                                          chatListItem.sendUserId == 1
+                                              ? 6.0
+                                              : 0.0,
+                                          0.0,
+                                        )),
+                                        topRight: Radius.circular(
+                                            valueOrDefault<double>(
+                                          chatListItem.sendUserId == 1
+                                              ? 0.0
+                                              : 6.0,
+                                          0.0,
+                                        )),
                                       ),
                                     ),
                                     alignment: const AlignmentDirectional(0.0, 0.0),
@@ -193,7 +205,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                           ),
                                           0.0),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
+                                        padding: const EdgeInsets.all(10.0),
                                         child: Text(
                                           chatListItem.content,
                                           style: FlutterFlowTheme.of(context)
@@ -331,7 +343,6 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                               width: 32.0,
                               height: 32.0,
                               decoration: BoxDecoration(
-                                color: Colors.white,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: Image.asset(
