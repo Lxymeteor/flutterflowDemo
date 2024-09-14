@@ -1,7 +1,9 @@
+import '/components/checkout2_payment_form_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'buy_gem_page_model.dart';
@@ -71,32 +73,32 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
         ),
         body: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: Text(
-                    'Buy Game Currency',
-                    style: FlutterFlowTheme.of(context).displaySmall.override(
-                          fontFamily: 'Inter Tight',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                child: Text(
+                  'Buy Game Currency',
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily: 'Inter Tight',
+                        letterSpacing: 0.0,
+                      ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Choose your desired amount:',
-                    style: FlutterFlowTheme.of(context).labelLarge.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Choose your desired amount:',
+                  style: FlutterFlowTheme.of(context).labelLarge.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
+                      ),
                 ),
-                Builder(
+              ),
+              Expanded(
+                child: Builder(
                   builder: (context) {
                     final payGearsList = FFAppState().payGearsList.toList();
 
@@ -161,7 +163,10 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                                           .titleMedium
                                           .override(
                                             fontFamily: 'Inter Tight',
-                                            color: const Color(0xFFBCBCBC),
+                                            color: _model.state ==
+                                                    payGearsListIndex
+                                                ? Colors.white
+                                                : const Color(0xFFBCBCBC),
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -171,7 +176,10 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                                           .titleMedium
                                           .override(
                                             fontFamily: 'Inter Tight',
-                                            color: const Color(0xFFBCBCBC),
+                                            color: _model.state ==
+                                                    payGearsListIndex
+                                                ? Colors.white
+                                                : const Color(0xFFBCBCBC),
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -185,55 +193,152 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                     );
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Enjoy your game!',
-                    style: FlutterFlowTheme.of(context).labelMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ),
-                Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        '\$',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Enjoy your game!',
+                  style: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
                       ),
-                      Text(
-                        _model.payCount.toString(),
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                            ),
-                      ),
-                    ],
-                  ),
                 ),
-                Align(
-                  alignment: const AlignmentDirectional(1.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+              ),
+              Container(
+                width: MediaQuery.sizeOf(context).width * 1.0,
+                height: 100.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      '\$',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                    Text(
+                      _model.payCount.toString(),
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 100.0,
+                      child: VerticalDivider(
+                        thickness: 2.0,
+                        color: FlutterFlowTheme.of(context).alternate,
+                      ),
+                    ),
+                    Text(
+                      getJsonField(
+                        _model.datas1,
+                        r'''$.param''',
+                      ).toString(),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 100.0,
+                      child: VerticalDivider(
+                        thickness: 2.0,
+                        color: FlutterFlowTheme.of(context).alternate,
+                      ),
+                    ),
+                    Text(
+                      getJsonField(
+                        _model.datas1,
+                        r'''$.count''',
+                      ).toString(),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 100.0,
+                      child: VerticalDivider(
+                        thickness: 2.0,
+                        color: FlutterFlowTheme.of(context).alternate,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(1.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: Checkout2PaymentFormWidget(
+                                  data1: _model.datas1,
+                                ),
+                              ),
+                            );
+                          },
+                        ).then((value) =>
+                            safeSetState(() => _model.data1 = value));
+
+                        if (_model.data1 != null) {
+                          _model.datas1 = _model.data1;
+                          safeSetState(() {});
+                        }
+
+                        safeSetState(() {});
+                      },
+                      text: 'Buy',
+                      options: FFButtonOptions(
+                        width: 80.0,
+                        height: 40.0,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Inter Tight',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 2.0,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      _model.datas1 = <String, dynamic>{
+                        'param': 'abc',
+                        'count': random_data.randomInteger(0, 5),
+                      };
+                      safeSetState(() {});
                     },
-                    text: 'Buy',
+                    text: 'Button',
                     options: FFButtonOptions(
-                      width: 80.0,
                       height: 40.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
@@ -243,13 +348,13 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                                 color: Colors.white,
                                 letterSpacing: 0.0,
                               ),
-                      elevation: 2.0,
+                      elevation: 0.0,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

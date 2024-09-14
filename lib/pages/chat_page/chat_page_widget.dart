@@ -57,8 +57,8 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                 color: Color(0xFFBCBCBC),
                 size: 32.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                context.safePop();
               },
             ),
           ),
@@ -200,6 +200,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Inter',
+                                                color: Colors.black,
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
