@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -105,8 +106,10 @@ class _MinePageWidgetState extends State<MinePageWidget> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(80.0),
-                              child: Image.network(
-                                'https://picsum.photos/seed/24/600',
+                              child: CachedNetworkImage(
+                                fadeInDuration: const Duration(milliseconds: 500),
+                                fadeOutDuration: const Duration(milliseconds: 500),
+                                imageUrl: 'https://picsum.photos/seed/24/600',
                                 width: 80.0,
                                 height: 80.0,
                                 fit: BoxFit.cover,
