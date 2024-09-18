@@ -224,20 +224,6 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
                 ),
               ),
             ),
-            Container(
-              width: MediaQuery.sizeOf(context).width * 1.0,
-              height: 100.0,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Text(
-                isiOS.toString(),
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Inter',
-                      letterSpacing: 0.0,
-                    ),
-              ),
-            ),
           ],
         ),
       ),

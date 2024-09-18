@@ -108,10 +108,10 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'indexPage': const IndexPageWidget(),
-      'minePage': const MinePageWidget(),
-      'messagePage': const MessagePageWidget(),
       'CreativePage': const CreativePageWidget(),
       'likePage': const LikePageWidget(),
+      'messagePage': const MessagePageWidget(),
+      'minePage': const MinePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -123,24 +123,16 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
+        backgroundColor: Colors.white,
+        selectedItemColor: const Color(0xFF14254F),
+        unselectedItemColor: const Color(0xFFCCCCCC),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add_alarm_outlined,
-              size: 24.0,
-            ),
-            label: 'Home2',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
+              Icons.home,
               size: 24.0,
             ),
             label: 'Home',
@@ -148,11 +140,15 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              FFIcons.kroundLikeFill,
-              size: 56.0,
+              Icons.explore_outlined,
+              size: 24.0,
             ),
-            activeIcon: Icon(
-              FFIcons.kroundLikeFill,
+            label: 'Createive',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              FFIcons.kroundLikeFill1,
               size: 56.0,
             ),
             label: '',
@@ -160,18 +156,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
+              Icons.chat_bubble,
               size: 24.0,
             ),
-            label: 'createive',
+            label: 'Message',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite,
+              Icons.people,
               size: 24.0,
             ),
-            label: 'Home',
+            label: 'Mine',
             tooltip: '',
           )
         ],

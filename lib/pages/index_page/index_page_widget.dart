@@ -3,7 +3,6 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'index_page_model.dart';
 export 'index_page_model.dart';
@@ -40,25 +39,6 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            print('FloatingActionButton pressed ...');
-          },
-          icon: const FaIcon(
-            FontAwesomeIcons.ad,
-          ),
-          elevation: 8.0,
-          label: Text(
-            'Click',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Inter',
-                  color: FlutterFlowTheme.of(context).alternate,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w300,
-                  fontStyle: FontStyle.italic,
-                ),
-          ),
-        ),
         body: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
           child: Column(
@@ -149,7 +129,8 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 467.0,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.network(
