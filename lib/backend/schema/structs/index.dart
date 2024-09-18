@@ -1,5 +1,7 @@
 export '/backend/schema/util/schema_util.dart';
 
+export 'ai_struct.dart';
+export 'all_ai_list_struct.dart';
 export 'all_users_struct.dart';
 export 'chat_list_struct.dart';
 export 'login_struct.dart';

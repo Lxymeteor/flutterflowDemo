@@ -109,7 +109,7 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                     color: Colors.white,
                   ),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: GetUsersCall.call(),
+                    future: AiGroup.findConditionAiCall.call(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -125,13 +125,13 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                           ),
                         );
                       }
-                      final listViewGetUsersResponse = snapshot.data!;
+                      final listViewFindConditionAiResponse = snapshot.data!;
 
                       return Builder(
                         builder: (context) {
-                          final userList = AllUsersStruct.maybeFromMap(
-                                      listViewGetUsersResponse.jsonBody)
-                                  ?.data
+                          final ai = AllAiListStruct.maybeFromMap(
+                                      listViewFindConditionAiResponse.jsonBody)
+                                  ?.rows
                                   .toList() ??
                               [];
 
@@ -139,9 +139,9 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: userList.length,
-                            itemBuilder: (context, userListIndex) {
-                              final userListItem = userList[userListIndex];
+                            itemCount: ai.length,
+                            itemBuilder: (context, aiIndex) {
+                              final aiItem = ai[aiIndex];
                               return Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 20.0, 16.0, 20.0),
@@ -152,8 +152,11 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                     color: Colors.white,
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: Image.asset(
-                                        'assets/images/images.jpeg',
+                                      image: Image.network(
+                                        AiStruct.maybeFromMap(
+                                                listViewFindConditionAiResponse
+                                                    .jsonBody)!
+                                            .headUrl,
                                       ).image,
                                     ),
                                     boxShadow: const [
@@ -238,30 +241,59 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
                                                 1.0,
-                                            height: 50.0,
                                             decoration: BoxDecoration(
                                               color: const Color(0x1C333332),
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
                                             ),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 5.0, 16.0, 0.0),
-                                              child: Text(
-                                                userListItem.email,
-                                                maxLines: 2,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'HouDiHei',
-                                                      color: const Color(0xFFFCFCFC),
-                                                      fontSize: 16.0,
-                                                      letterSpacing: 0.0,
-                                                      useGoogleFonts: false,
-                                                    ),
-                                              ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 5.0, 16.0, 0.0),
+                                                  child: Text(
+                                                    aiItem.aiBrief,
+                                                    maxLines: 2,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'HouDiHei',
+                                                          color:
+                                                              const Color(0xFFFCFCFC),
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 5.0, 16.0, 0.0),
+                                                  child: Text(
+                                                    aiItem.aiDetails,
+                                                    maxLines: 2,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'HouDiHei',
+                                                          color:
+                                                              const Color(0xFFFCFCFC),
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -289,8 +321,7 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                 text: TextSpan(
                                                   children: [
                                                     TextSpan(
-                                                      text: userListItem
-                                                          .firstName,
+                                                      text: aiItem.aiName,
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyMedium
@@ -304,35 +335,6 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                             useGoogleFonts:
                                                                 false,
                                                           ),
-                                                    ),
-                                                    TextSpan(
-                                                      text: '  ',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'HouDiHei',
-                                                            color: const Color(
-                                                                0xFFFCFCFC),
-                                                            fontSize: 12.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
-                                                    ),
-                                                    TextSpan(
-                                                      text:
-                                                          userListItem.lastName,
-                                                      style: const TextStyle(
-                                                        fontFamily: 'HouDiHei',
-                                                        color:
-                                                            Color(0xFFFCFCFC),
-                                                        fontSize: 12.0,
-                                                      ),
                                                     )
                                                   ],
                                                   style: FlutterFlowTheme.of(

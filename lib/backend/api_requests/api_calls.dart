@@ -8,6 +8,207 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
+/// Start ai Group Code
+
+class AiGroup {
+  static String getBaseUrl() => 'https://masia.tcqyhxy.top/';
+  static Map<String, String> headers = {
+    'userType': 'app_user',
+    'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+    'content-language': 'en_Us',
+  };
+  static LoginCall loginCall = LoginCall();
+  static FindConditionAiCall findConditionAiCall = FindConditionAiCall();
+  static AddAiCall addAiCall = AddAiCall();
+  static DeleteAiCall deleteAiCall = DeleteAiCall();
+  static AiChatCall aiChatCall = AiChatCall();
+  static FindAiTypeListCall findAiTypeListCall = FindAiTypeListCall();
+  static UploadCall uploadCall = UploadCall();
+}
+
+class LoginCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    const ffApiRequestBody = '''
+{
+	"phonenumber": "13876539876",
+    "smsCode": "1245"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'login',
+      apiUrl: '${baseUrl}api/app/sms/login',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindConditionAiCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findConditionAi',
+      apiUrl: '${baseUrl}api/ai/findConditionAi?pageSize=10&pageNum=1',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AddAiCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'addAi',
+      apiUrl: '${baseUrl}api/ai/addAi',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DeleteAiCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteAi',
+      apiUrl: '${baseUrl}api/ai/deleteAi',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AiChatCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'aiChat',
+      apiUrl: '${baseUrl}api/ai/aiChat',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class FindAiTypeListCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'findAiTypeList',
+      apiUrl: '${baseUrl}api/ai/findAiTypeList',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UploadCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = AiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'upload',
+      apiUrl: '${baseUrl}api/app/upload/',
+      callType: ApiCallType.POST,
+      headers: {
+        'userType': 'app_user',
+        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
+        'content-language': 'en_Us',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End ai Group Code
+
 class GetAllPassengerCall {
   static Future<ApiCallResponse> call({
     int? page,
@@ -43,30 +244,6 @@ class GetUsersCall {
       params: {
         'page': page,
       },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class PostCall {
-  static Future<ApiCallResponse> call({
-    dynamic productsJson,
-  }) async {
-    final products = _serializeJson(productsJson);
-    final ffApiRequestBody = products;
-    return ApiManager.instance.makeApiCall(
-      callName: 'post',
-      apiUrl: 'https://dummyjson.com/products/add',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

@@ -59,7 +59,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              context.safePop();
             },
           ),
           title: Text(
