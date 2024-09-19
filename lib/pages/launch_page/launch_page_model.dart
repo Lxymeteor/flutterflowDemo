@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'launch_page_widget.dart' show LaunchPageWidget;
 import 'package:flutter/cupertino.dart';
@@ -26,6 +27,8 @@ class LaunchPageModel extends FlutterFlowModel<LaunchPageWidget> {
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   DateTime? datePicked;
+  // Stores action output result for [Backend Call - API (login)] action in Button widget.
+  ApiCallResponse? loginResult;
 
   @override
   void initState(BuildContext context) {}

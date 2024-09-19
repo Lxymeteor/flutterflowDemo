@@ -119,7 +119,7 @@ class _MinePageWidgetState extends State<MinePageWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 0.0),
                               child: Text(
-                                'Hi,how do',
+                                'Hi,${FFAppState().User.firstName}',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

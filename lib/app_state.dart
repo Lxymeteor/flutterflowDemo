@@ -21,6 +21,16 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _token = prefs.getString('ff_token') ?? _token;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_User')) {
+        try {
+          final serializedData = prefs.getString('ff_User') ?? '{}';
+          _User = UserStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -299,6 +309,19 @@ class FFAppState extends ChangeNotifier {
   set token(String value) {
     _token = value;
     prefs.setString('ff_token', value);
+  }
+
+  UserStruct _User =
+      UserStruct.fromSerializableMap(jsonDecode('{\"id\":\"1\"}'));
+  UserStruct get User => _User;
+  set User(UserStruct value) {
+    _User = value;
+    prefs.setString('ff_User', value.serialize());
+  }
+
+  void updateUserStruct(Function(UserStruct) updateFn) {
+    updateFn(_User);
+    prefs.setString('ff_User', _User.serialize());
   }
 }
 

@@ -1,3 +1,5 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -47,23 +49,24 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: PageView(
-                    controller: _model.pageViewController ??=
-                        PageController(initialPage: 0),
-                    onPageChanged: (_) => safeSetState(() {}),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Container(
+        backgroundColor: Colors.white,
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: PageView(
+                  controller: _model.pageViewController ??=
+                      PageController(initialPage: 0),
+                  onPageChanged: (_) => safeSetState(() {}),
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
@@ -129,7 +132,11 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
                           ],
                         ),
                       ),
-                      Container(
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
@@ -195,7 +202,11 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
                           ],
                         ),
                       ),
-                      Container(
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
@@ -261,7 +272,11 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
                           ],
                         ),
                       ),
-                      Container(
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
@@ -517,10 +532,28 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 16.0, 40.0),
+                                  16.0, 0.0, 16.0, 60.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('indexPage');
+                                  _model.loginResult =
+                                      await AiGroup.loginCall.call();
+
+                                  if ((_model.loginResult?.succeeded ?? true)) {
+                                    FFAppState().token = getJsonField(
+                                      (_model.loginResult?.jsonBody ?? ''),
+                                      r'''$.data.token''',
+                                    ).toString();
+                                    safeSetState(() {});
+                                    FFAppState().User = UserStruct(
+                                      firstName: _model.userName,
+                                      birthDay: _model.birthDay,
+                                    );
+                                    safeSetState(() {});
+
+                                    context.pushNamed('indexPage');
+                                  }
+
+                                  safeSetState(() {});
                                 },
                                 text: 'Create',
                                 options: FFButtonOptions(
@@ -548,12 +581,12 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

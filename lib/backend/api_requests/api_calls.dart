@@ -32,8 +32,9 @@ class LoginCall {
 
     const ffApiRequestBody = '''
 {
-	"phonenumber": "13876539876",
-    "smsCode": "1245"
+  "phonenumber": "13876539876",
+  "smsCode": "1245",
+  "systemType": 18
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'login',

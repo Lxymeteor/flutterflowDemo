@@ -12,11 +12,13 @@ class UserStruct extends BaseStruct {
     String? firstName,
     String? lastName,
     String? avatar,
+    String? birthDay,
   })  : _id = id,
         _email = email,
         _firstName = firstName,
         _lastName = lastName,
-        _avatar = avatar;
+        _avatar = avatar,
+        _birthDay = birthDay;
 
   // "id" field.
   int? _id;
@@ -55,12 +57,20 @@ class UserStruct extends BaseStruct {
 
   bool hasAvatar() => _avatar != null;
 
+  // "birthDay" field.
+  String? _birthDay;
+  String get birthDay => _birthDay ?? '';
+  set birthDay(String? val) => _birthDay = val;
+
+  bool hasBirthDay() => _birthDay != null;
+
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(
         id: castToType<int>(data['id']),
         email: data['email'] as String?,
         firstName: data['first_name'] as String?,
         lastName: data['last_name'] as String?,
         avatar: data['avatar'] as String?,
+        birthDay: data['birthDay'] as String?,
       );
 
   static UserStruct? maybeFromMap(dynamic data) =>
@@ -72,6 +82,7 @@ class UserStruct extends BaseStruct {
         'first_name': _firstName,
         'last_name': _lastName,
         'avatar': _avatar,
+        'birthDay': _birthDay,
       }.withoutNulls;
 
   @override
@@ -94,6 +105,10 @@ class UserStruct extends BaseStruct {
         ),
         'avatar': serializeParam(
           _avatar,
+          ParamType.String,
+        ),
+        'birthDay': serializeParam(
+          _birthDay,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -125,6 +140,11 @@ class UserStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        birthDay: deserializeParam(
+          data['birthDay'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -137,12 +157,13 @@ class UserStruct extends BaseStruct {
         email == other.email &&
         firstName == other.firstName &&
         lastName == other.lastName &&
-        avatar == other.avatar;
+        avatar == other.avatar &&
+        birthDay == other.birthDay;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([id, email, firstName, lastName, avatar]);
+  int get hashCode => const ListEquality()
+      .hash([id, email, firstName, lastName, avatar, birthDay]);
 }
 
 UserStruct createUserStruct({
@@ -151,6 +172,7 @@ UserStruct createUserStruct({
   String? firstName,
   String? lastName,
   String? avatar,
+  String? birthDay,
 }) =>
     UserStruct(
       id: id,
@@ -158,4 +180,5 @@ UserStruct createUserStruct({
       firstName: firstName,
       lastName: lastName,
       avatar: avatar,
+      birthDay: birthDay,
     );
