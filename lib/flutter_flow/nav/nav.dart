@@ -32,32 +32,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.showSplashImage
-          ? Builder(
-              builder: (context) => Container(
-                color: Colors.transparent,
-                child: Image.asset(
-                  'assets/images/@2x.png',
-                  fit: BoxFit.fill,
-                ),
-              ),
-            )
-          : const NavBarPage(),
+      errorBuilder: (context, state) => const LaunchPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.showSplashImage
-              ? Builder(
-                  builder: (context) => Container(
-                    color: Colors.transparent,
-                    child: Image.asset(
-                      'assets/images/@2x.png',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                )
-              : const NavBarPage(),
+          builder: (context, _) => const LaunchPageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -70,11 +50,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'indexPage')
               : const IndexPageWidget(),
-        ),
-        FFRoute(
-          name: 'signPage',
-          path: '/signPage',
-          builder: (context, params) => const SignPageWidget(),
         ),
         FFRoute(
           name: 'minePage',
@@ -118,14 +93,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const ChatPageWidget(),
         ),
         FFRoute(
-          name: 'payPage',
-          path: '/payPage',
-          builder: (context, params) => const PayPageWidget(),
-        ),
-        FFRoute(
           name: 'buyGemPage',
           path: '/buyGemPage',
           builder: (context, params) => const BuyGemPageWidget(),
+        ),
+        FFRoute(
+          name: 'launchPage',
+          path: '/launchPage',
+          builder: (context, params) => const LaunchPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

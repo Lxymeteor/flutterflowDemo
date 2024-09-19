@@ -89,7 +89,7 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                     color: Colors.white,
                   ),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: FindAiCall.call(),
+                    future: AiGroup.findConditionAiCall.call(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -105,12 +105,12 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                           ),
                         );
                       }
-                      final listViewFindAiResponse = snapshot.data!;
+                      final listViewFindConditionAiResponse = snapshot.data!;
 
                       return Builder(
                         builder: (context) {
                           final ai = AllAiListStruct.maybeFromMap(
-                                      listViewFindAiResponse.jsonBody)
+                                      listViewFindConditionAiResponse.jsonBody)
                                   ?.rows
                                   .toList() ??
                               [];
@@ -134,10 +134,7 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.network(
-                                        AiStruct.maybeFromMap(
-                                                listViewFindAiResponse
-                                                    .jsonBody)!
-                                            .headUrl,
+                                        aiItem.headUrl,
                                       ).image,
                                     ),
                                     boxShadow: const [

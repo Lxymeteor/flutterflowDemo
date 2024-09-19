@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/backend/schema/structs/index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -15,12 +16,19 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _token = prefs.getString('ff_token') ?? _token;
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   List<bool> _likeList = [true, true, true];
   List<bool> get likeList => _likeList;
@@ -49,12 +57,6 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInLikeList(int index, bool value) {
     likeList.insert(index, value);
-  }
-
-  bool _text1 = false;
-  bool get text1 => _text1;
-  set text1(bool value) {
-    _text1 = value;
   }
 
   int _number1 = 0;
@@ -291,4 +293,23 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInPayGearsList(int index, PayGearsStruct value) {
     payGearsList.insert(index, value);
   }
+
+  String _token = '';
+  String get token => _token;
+  set token(String value) {
+    _token = value;
+    prefs.setString('ff_token', value);
+  }
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }

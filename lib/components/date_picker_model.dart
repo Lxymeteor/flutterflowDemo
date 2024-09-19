@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'pay_page_widget.dart' show PayPageWidget;
+import 'date_picker_widget.dart' show DatePickerWidget;
 import 'package:flutter/material.dart';
 
-class PayPageModel extends FlutterFlowModel<PayPageWidget> {
+class DatePickerModel extends FlutterFlowModel<DatePickerWidget> {
   @override
   void initState(BuildContext context) {}
 

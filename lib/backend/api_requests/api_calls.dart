@@ -254,30 +254,6 @@ class GetUsersCall {
   }
 }
 
-class FindAiCall {
-  static Future<ApiCallResponse> call() async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'findAi',
-      apiUrl:
-          'https://masia.tcqyhxy.top/api/ai/findConditionAi?pageSize=10&pageNum=1',
-      callType: ApiCallType.POST,
-      headers: {
-        'userType': 'app_user',
-        'Authorization': 'Bearer 3771adfb-8560-46a3-b57f-992a6104c253',
-        'content-language': 'en_Us',
-      },
-      params: {},
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
