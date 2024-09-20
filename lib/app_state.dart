@@ -293,7 +293,23 @@ class FFAppState extends ChangeNotifier {
     PartnerStruct.fromSerializableMap(jsonDecode(
         '{\"id\":\"1816716695947616258\",\"name\":\"Emily\",\"brief\":\"Emily\",\"introduce\":\"你的名字叫Emily，是一个穿粉红色长裙，大波浪长发且性感漂亮的亚洲女生，请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult0.png\",\"isLike\":\"false\"}')),
     PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"1816716786372616194\",\"name\":\"Sarah\",\"brief\":\"Sarah\",\"introduce\":\"你的名字叫Sarah，是一个穿着蓝色长裙，棕色波浪头发的性感女模特。请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult1.png\",\"isLike\":\"false\"}'))
+        '{\"id\":\"1816716786372616194\",\"name\":\"Sarah\",\"brief\":\"Sarah\",\"introduce\":\"你的名字叫Sarah，是一个穿着蓝色长裙，棕色波浪头发的性感女模特。请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult1.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816716860972507137\",\"name\":\"Sophia\",\"brief\":\"Sophia\",\"introduce\":\"你的名字叫Sophia，是一个穿着黑色T恤，深棕色波浪长发的亚洲女生,请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult2.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717076308074498\",\"name\":\"Emma\",\"brief\":\"Emma\",\"introduce\":\"你的名字叫Emma，是一个穿着白色晚礼服长裙，棕色长发大波浪的漂亮女生，请使用英文回复\",\"headUrl\":\"assets/images/tirosResult3.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717579184152577\",\"name\":\"Laura\",\"brief\":\"Laura\",\"introduce\":\"你的名字叫Laura，是一个穿着蓝色长裙，棕色中长发的亚洲女生，请使用英文回复\",\"headUrl\":\"assets/images/tirosResult4.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717579184152578\",\"name\":\"Olivia\",\"brief\":\"Olivia\",\"introduce\":\"你的名字叫Olivia，是一个穿着短袖，黑色长直发，时尚的亚洲女生，请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult5.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717579184152579\",\"name\":\"Akira\",\"brief\":\"Akira\",\"introduce\":\"你的名字叫Akira，是一个穿着晚礼服，黑色大波浪长发的女生，请使用英文回复\",\"headUrl\":\"assets/images/tirosResult6.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717647719079937\",\"name\":\"Gilbert\",\"brief\":\"Gilbert\",\"introduce\":\"你的名字叫Gilbert，是一个黑色短发，穿着黑色西服，长相帅气的男生，请使用英文回复\",\"headUrl\":\"assets/images/tirosResult7.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717722067312642\",\"name\":\"Lucille\",\"brief\":\"Lucille\",\"introduce\":\"你的名字叫Lucille，是一个黑色短发，爱好健身，五官俊秀的男生，请使用英文回复\",\"headUrl\":\"assets/images/tirosResult8.png\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816717783006355458\",\"name\":\"Pratt\",\"brief\":\"Pratt\",\"introduce\":\"你的名字叫Pratt，是一个黑色中分短发，身材匀称，五官端正的男生，请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult9.png\",\"isLike\":\"false\"}'))
   ];
   List<PartnerStruct> get partnerList => _partnerList;
   set partnerList(List<PartnerStruct> value) {
