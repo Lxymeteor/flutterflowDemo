@@ -165,10 +165,15 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                     children: [
                                       Container(
                                         width: 62.0,
-                                        height: 180.0,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
+                                        height: 210.0,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: Image.asset(
+                                              'assets/images/Group_3772@2x.png',
+                                            ).image,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
                                             bottomLeft: Radius.circular(32.0),
                                             bottomRight: Radius.circular(0.0),
                                             topLeft: Radius.circular(32.0),
