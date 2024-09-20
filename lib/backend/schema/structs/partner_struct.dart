@@ -7,25 +7,23 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class PartnerStruct extends BaseStruct {
   PartnerStruct({
-    int? id,
+    String? id,
     String? name,
+    String? brief,
     String? introduce,
-    String? marks,
+    String? headUrl,
     bool? isLike,
-    String? avatar,
   })  : _id = id,
         _name = name,
+        _brief = brief,
         _introduce = introduce,
-        _marks = marks,
-        _isLike = isLike,
-        _avatar = avatar;
+        _headUrl = headUrl,
+        _isLike = isLike;
 
   // "id" field.
-  int? _id;
-  int get id => _id ?? 0;
-  set id(int? val) => _id = val;
-
-  void incrementId(int amount) => id = id + amount;
+  String? _id;
+  String get id => _id ?? '';
+  set id(String? val) => _id = val;
 
   bool hasId() => _id != null;
 
@@ -36,6 +34,13 @@ class PartnerStruct extends BaseStruct {
 
   bool hasName() => _name != null;
 
+  // "brief" field.
+  String? _brief;
+  String get brief => _brief ?? '';
+  set brief(String? val) => _brief = val;
+
+  bool hasBrief() => _brief != null;
+
   // "introduce" field.
   String? _introduce;
   String get introduce => _introduce ?? '';
@@ -43,12 +48,12 @@ class PartnerStruct extends BaseStruct {
 
   bool hasIntroduce() => _introduce != null;
 
-  // "marks" field.
-  String? _marks;
-  String get marks => _marks ?? '';
-  set marks(String? val) => _marks = val;
+  // "headUrl" field.
+  String? _headUrl;
+  String get headUrl => _headUrl ?? '';
+  set headUrl(String? val) => _headUrl = val;
 
-  bool hasMarks() => _marks != null;
+  bool hasHeadUrl() => _headUrl != null;
 
   // "isLike" field.
   bool? _isLike;
@@ -57,20 +62,13 @@ class PartnerStruct extends BaseStruct {
 
   bool hasIsLike() => _isLike != null;
 
-  // "avatar" field.
-  String? _avatar;
-  String get avatar => _avatar ?? '';
-  set avatar(String? val) => _avatar = val;
-
-  bool hasAvatar() => _avatar != null;
-
   static PartnerStruct fromMap(Map<String, dynamic> data) => PartnerStruct(
-        id: castToType<int>(data['id']),
+        id: data['id'] as String?,
         name: data['name'] as String?,
+        brief: data['brief'] as String?,
         introduce: data['introduce'] as String?,
-        marks: data['marks'] as String?,
+        headUrl: data['headUrl'] as String?,
         isLike: data['isLike'] as bool?,
-        avatar: data['avatar'] as String?,
       );
 
   static PartnerStruct? maybeFromMap(dynamic data) =>
@@ -79,37 +77,37 @@ class PartnerStruct extends BaseStruct {
   Map<String, dynamic> toMap() => {
         'id': _id,
         'name': _name,
+        'brief': _brief,
         'introduce': _introduce,
-        'marks': _marks,
+        'headUrl': _headUrl,
         'isLike': _isLike,
-        'avatar': _avatar,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
         'id': serializeParam(
           _id,
-          ParamType.int,
+          ParamType.String,
         ),
         'name': serializeParam(
           _name,
+          ParamType.String,
+        ),
+        'brief': serializeParam(
+          _brief,
           ParamType.String,
         ),
         'introduce': serializeParam(
           _introduce,
           ParamType.String,
         ),
-        'marks': serializeParam(
-          _marks,
+        'headUrl': serializeParam(
+          _headUrl,
           ParamType.String,
         ),
         'isLike': serializeParam(
           _isLike,
           ParamType.bool,
-        ),
-        'avatar': serializeParam(
-          _avatar,
-          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -117,11 +115,16 @@ class PartnerStruct extends BaseStruct {
       PartnerStruct(
         id: deserializeParam(
           data['id'],
-          ParamType.int,
+          ParamType.String,
           false,
         ),
         name: deserializeParam(
           data['name'],
+          ParamType.String,
+          false,
+        ),
+        brief: deserializeParam(
+          data['brief'],
           ParamType.String,
           false,
         ),
@@ -130,19 +133,14 @@ class PartnerStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        marks: deserializeParam(
-          data['marks'],
+        headUrl: deserializeParam(
+          data['headUrl'],
           ParamType.String,
           false,
         ),
         isLike: deserializeParam(
           data['isLike'],
           ParamType.bool,
-          false,
-        ),
-        avatar: deserializeParam(
-          data['avatar'],
-          ParamType.String,
           false,
         ),
       );
@@ -155,30 +153,30 @@ class PartnerStruct extends BaseStruct {
     return other is PartnerStruct &&
         id == other.id &&
         name == other.name &&
+        brief == other.brief &&
         introduce == other.introduce &&
-        marks == other.marks &&
-        isLike == other.isLike &&
-        avatar == other.avatar;
+        headUrl == other.headUrl &&
+        isLike == other.isLike;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([id, name, introduce, marks, isLike, avatar]);
+      const ListEquality().hash([id, name, brief, introduce, headUrl, isLike]);
 }
 
 PartnerStruct createPartnerStruct({
-  int? id,
+  String? id,
   String? name,
+  String? brief,
   String? introduce,
-  String? marks,
+  String? headUrl,
   bool? isLike,
-  String? avatar,
 }) =>
     PartnerStruct(
       id: id,
       name: name,
+      brief: brief,
       introduce: introduce,
-      marks: marks,
+      headUrl: headUrl,
       isLike: isLike,
-      avatar: avatar,
     );

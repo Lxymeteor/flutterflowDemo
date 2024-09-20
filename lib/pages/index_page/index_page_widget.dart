@@ -3,6 +3,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'index_page_model.dart';
 export 'index_page_model.dart';
@@ -34,6 +35,8 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -109,7 +112,7 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
 
                       return Builder(
                         builder: (context) {
-                          final ai = AllAiListStruct.maybeFromMap(
+                          final aiPartner = AllAiListStruct.maybeFromMap(
                                       listViewFindConditionAiResponse.jsonBody)
                                   ?.rows
                                   .toList() ??
@@ -119,9 +122,9 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: ai.length,
-                            itemBuilder: (context, aiIndex) {
-                              final aiItem = ai[aiIndex];
+                            itemCount: aiPartner.length,
+                            itemBuilder: (context, aiPartnerIndex) {
+                              final aiPartnerItem = aiPartner[aiPartnerIndex];
                               return Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 20.0, 16.0, 20.0),
@@ -134,7 +137,7 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.network(
-                                        aiItem.headUrl,
+                                        FFAppState().partnerList.first.headUrl,
                                       ).image,
                                     ),
                                     boxShadow: const [
@@ -234,7 +237,14 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                       .fromSTEB(
                                                           16.0, 5.0, 16.0, 0.0),
                                                   child: Text(
-                                                    aiItem.aiBrief,
+                                                    FFAppState()
+                                                        .partnerList
+                                                        .where((e) =>
+                                                            aiPartnerItem.id !=
+                                                            e.id)
+                                                        .toList()[
+                                                            aiPartnerIndex]
+                                                        .brief,
                                                     maxLines: 2,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -255,7 +265,14 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                       .fromSTEB(
                                                           16.0, 5.0, 16.0, 0.0),
                                                   child: Text(
-                                                    aiItem.aiDetails,
+                                                    FFAppState()
+                                                        .partnerList
+                                                        .where((e) =>
+                                                            aiPartnerItem.id !=
+                                                            e.id)
+                                                        .toList()[
+                                                            aiPartnerIndex]
+                                                        .introduce,
                                                     maxLines: 2,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -299,7 +316,15 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                 text: TextSpan(
                                                   children: [
                                                     TextSpan(
-                                                      text: aiItem.aiName,
+                                                      text: FFAppState()
+                                                          .partnerList
+                                                          .where((e) =>
+                                                              aiPartnerItem
+                                                                  .id !=
+                                                              e.id)
+                                                          .toList()[
+                                                              aiPartnerIndex]
+                                                          .name,
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyMedium

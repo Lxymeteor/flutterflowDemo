@@ -31,6 +31,21 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _partnerList = prefs
+              .getStringList('ff_partnerList')
+              ?.map((x) {
+                try {
+                  return PartnerStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _partnerList;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -176,56 +191,6 @@ class FFAppState extends ChangeNotifier {
     userMessageList.insert(index, value);
   }
 
-  List<PartnerStruct> _partnerList = [
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/396/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/701/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/987/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/746/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/891/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/270/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/301/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/60/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/94/600\"}')),
-    PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Hello World\",\"introduce\":\"Hello World\",\"marks\":\"Hello World\",\"isLike\":\"false\",\"avatar\":\"https://picsum.photos/seed/602/600\"}'))
-  ];
-  List<PartnerStruct> get partnerList => _partnerList;
-  set partnerList(List<PartnerStruct> value) {
-    _partnerList = value;
-  }
-
-  void addToPartnerList(PartnerStruct value) {
-    partnerList.add(value);
-  }
-
-  void removeFromPartnerList(PartnerStruct value) {
-    partnerList.remove(value);
-  }
-
-  void removeAtIndexFromPartnerList(int index) {
-    partnerList.removeAt(index);
-  }
-
-  void updatePartnerListAtIndex(
-    int index,
-    PartnerStruct Function(PartnerStruct) updateFn,
-  ) {
-    partnerList[index] = updateFn(_partnerList[index]);
-  }
-
-  void insertAtIndexInPartnerList(int index, PartnerStruct value) {
-    partnerList.insert(index, value);
-  }
-
   List<ChatListStruct> _chatList = [
     ChatListStruct.fromSerializableMap(jsonDecode(
         '{\"id\":\"1\",\"sendUserId\":\"1\",\"receiveUserId\":\"2\",\"content\":\"Hello World1\",\"createTime\":\"1726196583111\",\"sendTime\":\"1726196583111\"}')),
@@ -322,6 +287,52 @@ class FFAppState extends ChangeNotifier {
   void updateUserStruct(Function(UserStruct) updateFn) {
     updateFn(_User);
     prefs.setString('ff_User', _User.serialize());
+  }
+
+  List<PartnerStruct> _partnerList = [
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816716695947616300\",\"name\":\"Emily\",\"brief\":\"Emily\",\"headUrl\":\"assets/images/tirosResult0.png\",\"introduce\":\"你的名字叫Emily，是一个穿粉红色长裙，大波浪长发且性感漂亮的亚洲女生，请使用英文回复。\",\"isLike\":\"false\"}')),
+    PartnerStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1816716786372616194\",\"name\":\"Sarah\",\"brief\":\"Sarah\",\"headUrl\":\"assets/images/tirosResult1.png\",\"introduce\":\"你的名字叫Sarah，是一个穿着蓝色长裙，棕色波浪头发的性感女模特。请使用英文回复。\",\"isLike\":\"false\"}'))
+  ];
+  List<PartnerStruct> get partnerList => _partnerList;
+  set partnerList(List<PartnerStruct> value) {
+    _partnerList = value;
+    prefs.setStringList(
+        'ff_partnerList', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToPartnerList(PartnerStruct value) {
+    partnerList.add(value);
+    prefs.setStringList(
+        'ff_partnerList', _partnerList.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromPartnerList(PartnerStruct value) {
+    partnerList.remove(value);
+    prefs.setStringList(
+        'ff_partnerList', _partnerList.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromPartnerList(int index) {
+    partnerList.removeAt(index);
+    prefs.setStringList(
+        'ff_partnerList', _partnerList.map((x) => x.serialize()).toList());
+  }
+
+  void updatePartnerListAtIndex(
+    int index,
+    PartnerStruct Function(PartnerStruct) updateFn,
+  ) {
+    partnerList[index] = updateFn(_partnerList[index]);
+    prefs.setStringList(
+        'ff_partnerList', _partnerList.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInPartnerList(int index, PartnerStruct value) {
+    partnerList.insert(index, value);
+    prefs.setStringList(
+        'ff_partnerList', _partnerList.map((x) => x.serialize()).toList());
   }
 }
 

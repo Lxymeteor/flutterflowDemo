@@ -307,7 +307,7 @@ class _LaunchPageWidgetState extends State<LaunchPageWidget> {
                             ),
                             Form(
                               key: _model.formKey,
-                              autovalidateMode: AutovalidateMode.disabled,
+                              autovalidateMode: AutovalidateMode.always,
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [

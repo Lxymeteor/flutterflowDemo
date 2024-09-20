@@ -62,6 +62,10 @@ class FindConditionAiCall {
   Future<ApiCallResponse> call() async {
     final baseUrl = AiGroup.getBaseUrl();
 
+    const ffApiRequestBody = '''
+{
+  "systemType": 18
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'findConditionAi',
       apiUrl: '${baseUrl}api/ai/findConditionAi?pageSize=10&pageNum=1',
@@ -72,6 +76,7 @@ class FindConditionAiCall {
         'content-language': 'en_Us',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,

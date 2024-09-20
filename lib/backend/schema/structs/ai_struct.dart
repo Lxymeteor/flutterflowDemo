@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class AiStruct extends BaseStruct {
   AiStruct({
+    String? id,
     String? headUrl,
     String? aiName,
     String? aiBrief,
@@ -14,13 +15,21 @@ class AiStruct extends BaseStruct {
     String? createType,
     int? systemType,
     int? aiType,
-  })  : _headUrl = headUrl,
+  })  : _id = id,
+        _headUrl = headUrl,
         _aiName = aiName,
         _aiBrief = aiBrief,
         _aiDetails = aiDetails,
         _createType = createType,
         _systemType = systemType,
         _aiType = aiType;
+
+  // "id" field.
+  String? _id;
+  String get id => _id ?? '';
+  set id(String? val) => _id = val;
+
+  bool hasId() => _id != null;
 
   // "headUrl" field.
   String? _headUrl;
@@ -76,6 +85,7 @@ class AiStruct extends BaseStruct {
   bool hasAiType() => _aiType != null;
 
   static AiStruct fromMap(Map<String, dynamic> data) => AiStruct(
+        id: data['id'] as String?,
         headUrl: data['headUrl'] as String?,
         aiName: data['aiName'] as String?,
         aiBrief: data['aiBrief'] as String?,
@@ -89,6 +99,7 @@ class AiStruct extends BaseStruct {
       data is Map ? AiStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
+        'id': _id,
         'headUrl': _headUrl,
         'aiName': _aiName,
         'aiBrief': _aiBrief,
@@ -100,6 +111,10 @@ class AiStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
+        'id': serializeParam(
+          _id,
+          ParamType.String,
+        ),
         'headUrl': serializeParam(
           _headUrl,
           ParamType.String,
@@ -131,6 +146,11 @@ class AiStruct extends BaseStruct {
       }.withoutNulls;
 
   static AiStruct fromSerializableMap(Map<String, dynamic> data) => AiStruct(
+        id: deserializeParam(
+          data['id'],
+          ParamType.String,
+          false,
+        ),
         headUrl: deserializeParam(
           data['headUrl'],
           ParamType.String,
@@ -174,6 +194,7 @@ class AiStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is AiStruct &&
+        id == other.id &&
         headUrl == other.headUrl &&
         aiName == other.aiName &&
         aiBrief == other.aiBrief &&
@@ -184,11 +205,20 @@ class AiStruct extends BaseStruct {
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [headUrl, aiName, aiBrief, aiDetails, createType, systemType, aiType]);
+  int get hashCode => const ListEquality().hash([
+        id,
+        headUrl,
+        aiName,
+        aiBrief,
+        aiDetails,
+        createType,
+        systemType,
+        aiType
+      ]);
 }
 
 AiStruct createAiStruct({
+  String? id,
   String? headUrl,
   String? aiName,
   String? aiBrief,
@@ -198,6 +228,7 @@ AiStruct createAiStruct({
   int? aiType,
 }) =>
     AiStruct(
+      id: id,
       headUrl: headUrl,
       aiName: aiName,
       aiBrief: aiBrief,

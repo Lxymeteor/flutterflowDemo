@@ -26,12 +26,22 @@ class LaunchPageModel extends FlutterFlowModel<LaunchPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  String? _textControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   DateTime? datePicked;
   // Stores action output result for [Backend Call - API (login)] action in Button widget.
   ApiCallResponse? loginResult;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    textControllerValidator = _textControllerValidator;
+  }
 
   @override
   void dispose() {
