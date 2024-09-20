@@ -137,7 +137,13 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.network(
-                                        FFAppState().partnerList.first.headUrl,
+                                        FFAppState()
+                                            .partnerList
+                                            .where(
+                                                (e) => aiPartnerItem.id == e.id)
+                                            .toList()
+                                            .first
+                                            .headUrl,
                                       ).image,
                                     ),
                                     boxShadow: const [
@@ -174,15 +180,41 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Container(
-                                              width: 42.0,
-                                              height: 42.0,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: Image.asset(
-                                                    'assets/images/Group_3799@2x.png',
-                                                  ).image,
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                FFAppState()
+                                                    .updatePartnerListAtIndex(
+                                                  aiPartnerIndex,
+                                                  (e) => e..isLike = !e.isLike,
+                                                );
+                                                safeSetState(() {});
+                                              },
+                                              child: Container(
+                                                width: 42.0,
+                                                height: 42.0,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: Image.network(
+                                                      FFAppState()
+                                                                  .partnerList
+                                                                  .where((e) =>
+                                                                      aiPartnerItem
+                                                                          .id ==
+                                                                      e.id)
+                                                                  .toList()
+                                                                  .first
+                                                                  .isLike ==
+                                                              true
+                                                          ? '\'assets/images/Group_3770@2x.png\''
+                                                          : '\'assets/images/Group_3799@2x.png\'',
+                                                    ).image,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -240,10 +272,10 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                     FFAppState()
                                                         .partnerList
                                                         .where((e) =>
-                                                            aiPartnerItem.id !=
+                                                            aiPartnerItem.id ==
                                                             e.id)
-                                                        .toList()[
-                                                            aiPartnerIndex]
+                                                        .toList()
+                                                        .first
                                                         .brief,
                                                     maxLines: 2,
                                                     style: FlutterFlowTheme.of(
@@ -268,10 +300,10 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                     FFAppState()
                                                         .partnerList
                                                         .where((e) =>
-                                                            aiPartnerItem.id !=
+                                                            aiPartnerItem.id ==
                                                             e.id)
-                                                        .toList()[
-                                                            aiPartnerIndex]
+                                                        .toList()
+                                                        .first
                                                         .introduce,
                                                     maxLines: 2,
                                                     style: FlutterFlowTheme.of(
@@ -320,10 +352,10 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                                                           .partnerList
                                                           .where((e) =>
                                                               aiPartnerItem
-                                                                  .id !=
+                                                                  .id ==
                                                               e.id)
-                                                          .toList()[
-                                                              aiPartnerIndex]
+                                                          .toList()
+                                                          .first
                                                           .name,
                                                       style: FlutterFlowTheme
                                                               .of(context)

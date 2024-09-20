@@ -291,9 +291,9 @@ class FFAppState extends ChangeNotifier {
 
   List<PartnerStruct> _partnerList = [
     PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"1816716695947616300\",\"name\":\"Emily\",\"brief\":\"Emily\",\"headUrl\":\"assets/images/tirosResult0.png\",\"introduce\":\"你的名字叫Emily，是一个穿粉红色长裙，大波浪长发且性感漂亮的亚洲女生，请使用英文回复。\",\"isLike\":\"false\"}')),
+        '{\"id\":\"1816716695947616258\",\"name\":\"Emily\",\"brief\":\"Emily\",\"introduce\":\"你的名字叫Emily，是一个穿粉红色长裙，大波浪长发且性感漂亮的亚洲女生，请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult0.png\",\"isLike\":\"false\"}')),
     PartnerStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"1816716786372616194\",\"name\":\"Sarah\",\"brief\":\"Sarah\",\"headUrl\":\"assets/images/tirosResult1.png\",\"introduce\":\"你的名字叫Sarah，是一个穿着蓝色长裙，棕色波浪头发的性感女模特。请使用英文回复。\",\"isLike\":\"false\"}'))
+        '{\"id\":\"1816716786372616194\",\"name\":\"Sarah\",\"brief\":\"Sarah\",\"introduce\":\"你的名字叫Sarah，是一个穿着蓝色长裙，棕色波浪头发的性感女模特。请使用英文回复。\",\"headUrl\":\"assets/images/tirosResult1.png\",\"isLike\":\"false\"}'))
   ];
   List<PartnerStruct> get partnerList => _partnerList;
   set partnerList(List<PartnerStruct> value) {
