@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -85,17 +84,31 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
                     ],
                   ),
                 ),
-                FlutterFlowIconButton(
-                  borderRadius: 8.0,
-                  buttonSize: 40.0,
-                  icon: const Icon(
-                    Icons.add_box_outlined,
-                    color: Color(0xFF333333),
-                    size: 24.0,
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('creativePartner');
+                    },
+                    child: Container(
+                      width: 24.0,
+                      height: 24.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          image: Image.asset(
+                            'assets/images/add.png',
+                          ).image,
+                        ),
+                      ),
+                    ),
                   ),
-                  onPressed: () async {
-                    context.pushNamed('creativePartner');
-                  },
                 ),
               ],
             ),

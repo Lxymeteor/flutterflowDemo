@@ -59,12 +59,15 @@ class LoginCall {
 }
 
 class FindConditionAiCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    int? createType,
+  }) async {
     final baseUrl = AiGroup.getBaseUrl();
 
-    const ffApiRequestBody = '''
+    final ffApiRequestBody = '''
 {
-  "systemType": 18
+  "systemType": 18,
+  "createType":"$createType"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'findConditionAi',
@@ -92,6 +95,10 @@ class AddAiCall {
   Future<ApiCallResponse> call() async {
     final baseUrl = AiGroup.getBaseUrl();
 
+    const ffApiRequestBody = '''
+{
+  "systemType": 18
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'addAi',
       apiUrl: '${baseUrl}api/ai/addAi',
@@ -102,6 +109,7 @@ class AddAiCall {
         'content-language': 'en_Us',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -189,12 +197,18 @@ class FindAiTypeListCall {
 }
 
 class UploadCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? file = '',
+  }) async {
     final baseUrl = AiGroup.getBaseUrl();
 
+    final ffApiRequestBody = '''
+{
+  "file": "$file"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'upload',
-      apiUrl: '${baseUrl}api/app/upload/',
+      apiUrl: '$baseUrl/api/app/upload/',
       callType: ApiCallType.POST,
       headers: {
         'userType': 'app_user',
@@ -202,6 +216,7 @@ class UploadCall {
         'content-language': 'en_Us',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,

@@ -92,7 +92,9 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
                     color: Colors.white,
                   ),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: AiGroup.findConditionAiCall.call(),
+                    future: AiGroup.findConditionAiCall.call(
+                      createType: 2,
+                    ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {

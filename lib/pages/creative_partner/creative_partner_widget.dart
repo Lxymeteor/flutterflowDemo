@@ -1,7 +1,8 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'creative_partner_model.dart';
 export 'creative_partner_model.dart';
@@ -43,7 +44,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Colors.black),
@@ -82,34 +83,127 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(33.0),
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 305.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(24.0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 3.0,
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FlutterFlowIconButton(
-                        borderRadius: 8.0,
-                        fillColor: Colors.white,
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.black,
-                          size: 48.0,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    final selectedMedia =
+                        await selectMediaWithSourceBottomSheet(
+                      context: context,
+                      maxWidth: 860.00,
+                      imageQuality: 50,
+                      allowPhoto: true,
+                      includeBlurHash: true,
+                    );
+                    if (selectedMedia != null &&
+                        selectedMedia.every((m) =>
+                            validateFileFormat(m.storagePath, context))) {
+                      safeSetState(() => _model.isDataUploading = true);
+                      var selectedUploadedFiles = <FFUploadedFile>[];
+
+                      try {
+                        showUploadMessage(
+                          context,
+                          'Uploading file...',
+                          showLoading: true,
+                        );
+                        selectedUploadedFiles = selectedMedia
+                            .map((m) => FFUploadedFile(
+                                  name: m.storagePath.split('/').last,
+                                  bytes: m.bytes,
+                                  height: m.dimensions?.height,
+                                  width: m.dimensions?.width,
+                                  blurHash: m.blurHash,
+                                ))
+                            .toList();
+                      } finally {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        _model.isDataUploading = false;
+                      }
+                      if (selectedUploadedFiles.length ==
+                          selectedMedia.length) {
+                        safeSetState(() {
+                          _model.uploadedLocalFile =
+                              selectedUploadedFiles.first;
+                        });
+                        showUploadMessage(context, 'Success!');
+                      } else {
+                        safeSetState(() {});
+                        showUploadMessage(context, 'Failed to upload data');
+                        return;
+                      }
+                    }
+
+                    _model.apiResultihc = await AiGroup.uploadCall.call(
+                      file: _model.isDataUploading.toString(),
+                    );
+
+                    if ((_model.apiResultihc?.succeeded ?? true)) {
+                      safeSetState(() {
+                        _model.textController1?.text =
+                            (_model.apiResultihc?.jsonBody ?? '').toString();
+                        _model.textController1?.selection =
+                            const TextSelection.collapsed(offset: 0);
+                      });
+                    }
+
+                    safeSetState(() {});
+                  },
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: 305.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24.0),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 3.0,
                       ),
-                    ],
+                    ),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: Container(
+                            width: 48.0,
+                            height: 48.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: Image.asset(
+                                  'assets/images/plus.png',
+                                ).image,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Opacity(
+                          opacity: (_model.uploadedLocalFile.bytes?.isEmpty ??
+                                      true)
+                              ? 0.0
+                              : 1.0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(24.0),
+                            child: Image.memory(
+                              _model.uploadedLocalFile.bytes ??
+                                  Uint8List.fromList([]),
+                              width: MediaQuery.sizeOf(context).width * 1.0,
+                              height: 305.0,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                'assets/images/error_image.png',
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: 305.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -134,6 +228,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Inter',
+                                    color: Colors.black,
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
@@ -155,12 +250,14 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Inter',
+                                          color: const Color(0xFF57636C),
                                           letterSpacing: 0.0,
                                         ),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Inter',
+                                          color: const Color(0xFF57636C),
                                           letterSpacing: 0.0,
                                         ),
                                     enabledBorder: OutlineInputBorder(
@@ -172,7 +269,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                        color: Colors.black,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(8.0),
@@ -200,10 +297,10 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                       ),
-                                  cursorColor:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  cursorColor: Colors.black,
                                   validator: _model.textController1Validator
                                       .asValidator(context),
                                 ),
@@ -215,6 +312,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Inter',
+                                    color: Colors.black,
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
@@ -236,12 +334,14 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Inter',
+                                          color: const Color(0xFF57636C),
                                           letterSpacing: 0.0,
                                         ),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Inter',
+                                          color: const Color(0xFF57636C),
                                           letterSpacing: 0.0,
                                         ),
                                     enabledBorder: OutlineInputBorder(
@@ -253,7 +353,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                        color: Color(0x00000000),
+                                        color: Colors.black,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(8.0),
@@ -281,10 +381,10 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
+                                        color: Colors.black,
                                         letterSpacing: 0.0,
                                       ),
-                                  cursorColor:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  cursorColor: Colors.black,
                                   validator: _model.textController2Validator
                                       .asValidator(context),
                                 ),
@@ -293,34 +393,56 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
-                              child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: 'Create 99',
-                                icon: const Icon(
-                                  Icons.flare,
-                                  size: 15.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height: 56.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: 56.0,
+                                decoration: BoxDecoration(
                                   color: const Color(0xFF0F1E48),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'HouDiHei',
-                                        color: Colors.white,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: false,
-                                      ),
-                                  elevation: 0.0,
                                   borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Create',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'HouDiHei',
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 10.0, 0.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/coins.png',
+                                          width: 24.0,
+                                          height: 24.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '99',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'HouDiHei',
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
