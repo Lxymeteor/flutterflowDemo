@@ -137,7 +137,7 @@ class _CreativePartnerWidgetState extends State<CreativePartnerWidget> {
                     }
 
                     _model.apiResultihc = await AiGroup.uploadCall.call(
-                      file: _model.isDataUploading.toString(),
+                      file: _model.uploadedLocalFile,
                     );
 
                     if ((_model.apiResultihc?.succeeded ?? true)) {

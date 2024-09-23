@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -198,14 +199,10 @@ class FindAiTypeListCall {
 
 class UploadCall {
   Future<ApiCallResponse> call({
-    String? file = '',
+    FFUploadedFile? file,
   }) async {
     final baseUrl = AiGroup.getBaseUrl();
 
-    final ffApiRequestBody = '''
-{
-  "file": "$file"
-}''';
     return ApiManager.instance.makeApiCall(
       callName: 'upload',
       apiUrl: '$baseUrl/api/app/upload/',
@@ -216,8 +213,7 @@ class UploadCall {
         'content-language': 'en_Us',
       },
       params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
+      bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
