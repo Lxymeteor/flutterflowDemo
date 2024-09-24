@@ -253,39 +253,64 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                _model.apiResult4lj =
-                                                    await AiGroup.deleteAiCall
-                                                        .call(
-                                                  id: partnerItem.id,
-                                                );
-
-                                                if ((_model.apiResult4lj
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  safeSetState(() => _model
-                                                          .apiRequestCompleter =
-                                                      null);
-                                                  await _model
-                                                      .waitForApiRequestCompleted();
-                                                }
-
-                                                safeSetState(() {});
-                                              },
-                                              child: ClipRRect(
+                                            Container(
+                                              width: 32.0,
+                                              height: 32.0,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF0F1E48),
                                                 borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.asset(
-                                                  'assets/images/Frame@2x.png',
-                                                  width: 32.0,
-                                                  height: 32.0,
-                                                  fit: BoxFit.cover,
+                                                    BorderRadius.circular(32.0),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        7.0, 7.0, 7.0, 7.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    _model.apiResult4lj =
+                                                        await AiGroup
+                                                            .deleteAiCall
+                                                            .call(
+                                                      id: partnerItem.id,
+                                                    );
+
+                                                    if ((_model.apiResult4lj
+                                                            ?.succeeded ??
+                                                        true)) {
+                                                      safeSetState(() => _model
+                                                              .apiRequestCompleter =
+                                                          null);
+                                                      await _model
+                                                          .waitForApiRequestCompleted();
+                                                    }
+
+                                                    safeSetState(() {});
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(0.0),
+                                                      bottomRight:
+                                                          Radius.circular(0.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                    child: Image.asset(
+                                                      'assets/images/delete.png',
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
