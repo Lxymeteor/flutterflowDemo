@@ -1,4 +1,4 @@
-package com.mycompany.demo1
+package com.mycompany.tida
 
 import io.flutter.embedding.android.FlutterActivity
 
