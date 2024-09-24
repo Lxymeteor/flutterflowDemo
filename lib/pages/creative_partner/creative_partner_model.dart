@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'creative_partner_widget.dart' show CreativePartnerWidget;
 import 'package:flutter/material.dart';
@@ -7,12 +6,6 @@ class CreativePartnerModel extends FlutterFlowModel<CreativePartnerWidget> {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-
-  // Stores action output result for [Backend Call - API (upload)] action in Container widget.
-  ApiCallResponse? apiResultihc;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
