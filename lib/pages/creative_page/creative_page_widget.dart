@@ -1,7 +1,10 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'creative_page_model.dart';
 export 'creative_page_model.dart';
@@ -33,8 +36,6 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
@@ -120,115 +121,158 @@ class _CreativePageWidgetState extends State<CreativePageWidget> {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: Builder(
-                    builder: (context) {
-                      final message = FFAppState().userMessageList.toList();
-
-                      return GridView.builder(
-                        padding: EdgeInsets.zero,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                          childAspectRatio: 1.0,
-                        ),
-                        scrollDirection: Axis.vertical,
-                        itemCount: message.length,
-                        itemBuilder: (context, messageIndex) {
-                          final messageItem = message[messageIndex];
-                          return Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: Image.network(
-                                  'https://images.unsplash.com/photo-1712809614510-d3e25cb38b05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxjYWxtaW5nJTIwbmF0dXJlfGVufDB8fHx8MTcyNTg4NTQ2OHww&ixlib=rb-4.0.3&q=80&w=400',
-                                ).image,
+                  child: FutureBuilder<ApiCallResponse>(
+                    future: AiGroup.findConditionAiCall.call(
+                      createType: 10,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
                               ),
-                              borderRadius: BorderRadius.circular(24.0),
-                              shape: BoxShape.rectangle,
                             ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Align(
-                                  alignment: const AlignmentDirectional(-1.0, 1.0),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 0.0, 8.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: const Color(0x4D333332),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
-                                        border: Border.all(
-                                          color: const Color(0x33FCFCFC),
-                                          width: 0.95,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 5.0, 10.0, 5.0),
-                                        child: Text(
-                                          'My partner',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter Tight',
-                                                color: const Color(0xFFFCFCFC),
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
+                          ),
+                        );
+                      }
+                      final gridViewFindConditionAiResponse = snapshot.data!;
+
+                      return Builder(
+                        builder: (context) {
+                          final partner = AllAiListStruct.maybeFromMap(
+                                      gridViewFindConditionAiResponse.jsonBody)
+                                  ?.rows
+                                  .toList() ??
+                              [];
+
+                          return GridView.builder(
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 10.0,
+                              childAspectRatio: 1.0,
+                            ),
+                            scrollDirection: Axis.vertical,
+                            itemCount: partner.length,
+                            itemBuilder: (context, partnerIndex) {
+                              final partnerItem = partner[partnerIndex];
+                              return Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: CachedNetworkImageProvider(
+                                      partnerItem.headUrl,
                                     ),
                                   ),
+                                  borderRadius: BorderRadius.circular(24.0),
+                                  shape: BoxShape.rectangle,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 8.0, 8.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.safePop();
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.asset(
-                                            'assets/images/Frame@2x.png',
-                                            width: 32.0,
-                                            height: 32.0,
-                                            fit: BoxFit.cover,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(-1.0, 1.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 0.0, 8.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: const Color(0x4D333332),
+                                            borderRadius:
+                                                BorderRadius.circular(24.0),
+                                            border: Border.all(
+                                              color: const Color(0x33FCFCFC),
+                                              width: 0.95,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 5.0, 10.0, 5.0),
+                                            child: AutoSizeText(
+                                              partnerItem.aiName,
+                                              maxLines: 1,
+                                              minFontSize: 10.0,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter Tight',
+                                                    color: const Color(0xFFFCFCFC),
+                                                    fontSize: 14.0,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/Group_3771@2x.png',
-                                          width: 32.0,
-                                          height: 32.0,
-                                          fit: BoxFit.cover,
-                                        ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 8.0, 8.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.safePop();
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Frame@2x.png',
+                                                width: 32.0,
+                                                height: 32.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed('ChatPage');
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.asset(
+                                                'assets/images/Group_3771@2x.png',
+                                                width: 32.0,
+                                                height: 32.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           );
                         },
                       );
