@@ -123,9 +123,16 @@ class AddAiCall {
 }
 
 class DeleteAiCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? id = '',
+  }) async {
     final baseUrl = AiGroup.getBaseUrl();
 
+    final ffApiRequestBody = '''
+{
+  "id": "$id",
+  "systemType": 18
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'deleteAi',
       apiUrl: '${baseUrl}api/ai/deleteAi',
@@ -136,6 +143,7 @@ class DeleteAiCall {
         'content-language': 'en_Us',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
