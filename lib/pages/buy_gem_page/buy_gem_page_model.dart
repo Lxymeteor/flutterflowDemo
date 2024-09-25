@@ -11,11 +11,6 @@ class BuyGemPageModel extends FlutterFlowModel<BuyGemPageWidget> {
 
   dynamic datas1;
 
-  ///  State fields for stateful widgets in this page.
-
-  // Stores action output result for [Bottom Sheet - Checkout2PaymentForm] action in Button widget.
-  dynamic data1;
-
   @override
   void initState(BuildContext context) {}
 

@@ -225,7 +225,7 @@ class _LikePageWidgetState extends State<LikePageWidget> {
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: Image.asset(
-                                                    'assets/images/Group_3799@2x.png',
+                                                    'assets/images/delete.png',
                                                   ).image,
                                                 ),
                                               ),

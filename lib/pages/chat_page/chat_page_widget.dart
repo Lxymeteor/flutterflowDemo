@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/change_photo/change_photo_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'chat_page_model.dart';
 export 'chat_page_model.dart';
 
@@ -37,8 +36,6 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -144,86 +141,51 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                       ),
                     ),
                     Expanded(
-                      child: Builder(
-                        builder: (context) {
-                          final chatList = FFAppState().chatList.toList();
-
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: chatList.length,
-                            itemBuilder: (context, chatListIndex) {
-                              final chatListItem = chatList[chatListIndex];
-                              return Align(
-                                alignment: AlignmentDirectional(
-                                    valueOrDefault<double>(
-                                      chatListItem.sendUserId == 1 ? 1.0 : -1.0,
-                                      0.0,
-                                    ),
-                                    0.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    constraints: BoxConstraints(
-                                      minHeight: 30.0,
-                                      maxWidth:
-                                          MediaQuery.sizeOf(context).width *
-                                              0.55,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: chatListItem.sendUserId == 1
-                                          ? const Color(0xFFFCFCFC)
-                                          : const Color(0xFFDAF18D),
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: const Radius.circular(6.0),
-                                        bottomRight: const Radius.circular(6.0),
-                                        topLeft: Radius.circular(
-                                            valueOrDefault<double>(
-                                          chatListItem.sendUserId == 1
-                                              ? 6.0
-                                              : 0.0,
-                                          0.0,
-                                        )),
-                                        topRight: Radius.circular(
-                                            valueOrDefault<double>(
-                                          chatListItem.sendUserId == 1
-                                              ? 0.0
-                                              : 6.0,
-                                          0.0,
-                                        )),
-                                      ),
-                                    ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(
-                                          valueOrDefault<double>(
-                                            chatListItem.sendUserId == 1
-                                                ? 1.0
-                                                : -1.0,
-                                            0.0,
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                constraints: BoxConstraints(
+                                  minHeight: 30.0,
+                                  maxWidth:
+                                      MediaQuery.sizeOf(context).width * 0.55,
+                                ),
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(6.0),
+                                    bottomRight: Radius.circular(6.0),
+                                    topLeft: Radius.circular(6.0),
+                                    topRight: Radius.circular(6.0),
+                                  ),
+                                ),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Align(
+                                  alignment: const AlignmentDirectional(1.0, 0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Hello World',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: Colors.black,
+                                            letterSpacing: 0.0,
                                           ),
-                                          0.0),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Text(
-                                          chatListItem.content,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color: Colors.black,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
                                     ),
                                   ),
                                 ),
-                              );
-                            },
-                          );
-                        },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
