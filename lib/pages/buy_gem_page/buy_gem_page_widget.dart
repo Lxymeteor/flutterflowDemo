@@ -307,24 +307,33 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 20.0),
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 70.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF14254F),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      'Purse',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'HouDiHei',
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            letterSpacing: 0.0,
-                            useGoogleFonts: false,
-                          ),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.safePop();
+                  },
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: 70.0,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF14254F),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Text(
+                        'Purse',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'HouDiHei',
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              letterSpacing: 0.0,
+                              useGoogleFonts: false,
+                            ),
+                      ),
                     ),
                   ),
                 ),

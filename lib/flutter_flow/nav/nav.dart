@@ -106,6 +106,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'aboutUsPage',
           path: '/aboutUsPage',
           builder: (context, params) => const AboutUsPageWidget(),
+        ),
+        FFRoute(
+          name: 'callPage',
+          path: '/callPage',
+          builder: (context, params) => const CallPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
