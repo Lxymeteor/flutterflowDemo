@@ -101,6 +101,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SplashPage',
           path: '/splashPage',
           builder: (context, params) => const SplashPageWidget(),
+        ),
+        FFRoute(
+          name: 'aboutUsPage',
+          path: '/aboutUsPage',
+          builder: (context, params) => const AboutUsPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

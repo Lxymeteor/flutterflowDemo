@@ -10,3 +10,4 @@ export '/pages/chat_page/chat_page_widget.dart' show ChatPageWidget;
 export '/pages/buy_gem_page/buy_gem_page_widget.dart' show BuyGemPageWidget;
 export '/pages/launch_page/launch_page_widget.dart' show LaunchPageWidget;
 export '/pages/splash_page/splash_page_widget.dart' show SplashPageWidget;
+export '/pages/about_us_page/about_us_page_widget.dart' show AboutUsPageWidget;
