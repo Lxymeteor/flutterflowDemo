@@ -88,7 +88,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('CreativePage');
+                    context.pushNamed('callPage');
                   },
                   child: Container(
                     width: 32.0,

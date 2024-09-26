@@ -48,41 +48,106 @@ class _IndexPageWidgetState extends State<IndexPageWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Stack(
-                  children: [
-                    Opacity(
-                      opacity: 0.1,
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
-                        child: GradientText(
-                          'My partner',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    child: Stack(
+                      children: [
+                        Opacity(
+                          opacity: 0.1,
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 25.0, 0.0, 0.0),
+                            child: GradientText(
+                              'My partner',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
                                     fontFamily: 'Inter',
                                     color: Colors.white,
                                     fontSize: 32.0,
                                     letterSpacing: 0.0,
                                   ),
-                          colors: const [Color(0xFF0F1E48), Colors.white],
-                          gradientDirection: GradientDirection.ttb,
-                          gradientType: GradientType.linear,
+                              colors: const [Color(0xFF0F1E48), Colors.white],
+                              gradientDirection: GradientDirection.ttb,
+                              gradientType: GradientType.linear,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'My partner',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.black,
+                                    fontSize: 32.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 16.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('nearbyPage');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4.58),
+                          border: Border.all(
+                            color: const Color(0xFF0F1E48),
+                            width: 2.0,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  3.0, 0.0, 0.0, 0.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.asset(
+                                  'assets/images/nearby.png',
+                                  width: 18.0,
+                                  height: 18.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                'Nearby',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: Colors.black,
+                                      fontSize: 15.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Text(
-                      'My partner',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            color: Colors.black,
-                            fontSize: 32.0,
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Expanded(
                 child: Container(
