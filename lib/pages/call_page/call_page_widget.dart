@@ -71,7 +71,7 @@ class _CallPageWidgetState extends State<CallPageWidget> {
                               color: const Color(0xFFFCFCFC),
                               fontSize: 16.0,
                               letterSpacing: 0.0,
-                              fontWeight: FontWeight.normal,
+                              fontWeight: FontWeight.w600,
                             ),
                       ),
                     ),
