@@ -78,7 +78,7 @@ class _BuyGemPageWidgetState extends State<BuyGemPageWidget> {
                         ),
                         Flexible(
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, -1.0),
                             child: Text(
                               'Purse',
                               textAlign: TextAlign.center,

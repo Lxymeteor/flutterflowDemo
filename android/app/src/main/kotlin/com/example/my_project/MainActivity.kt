@@ -1,4 +1,4 @@
-package com.mycompany.tida
+package com.TidaChat.Ai
 
 import io.flutter.embedding.android.FlutterActivity
 
